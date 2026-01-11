@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://hlys16w1gmx2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjufw"]
+bg_color = Color(0.25098, 0.0823529, 0.427451, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.25098, 0.0823529, 0.427451, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 369.0
+offset_top = 32.0
+offset_right = 816.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(0.0705882, 0, 0.780392, 1)
+theme_override_font_sizes/font_size = 48
+text = "Good luck, have fun :3"
+
+[node name="Lives" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 83.0
+offset_top = 151.0
+offset_right = 123.0
+offset_bottom = 191.0
+
+[node name="NonogramBoard" type="Control" parent="."]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 0
+offset_left = 465.0
+offset_top = 264.0
+offset_right = 765.0
+offset_bottom = 564.0
+
+[node name="Panel" type="Panel" parent="NonogramBoard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xjufw")
+
+[node name="MarginContainer" type="MarginContainer" parent="NonogramBoard/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="NonogramBoard/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="NonogramBoard/Panel/MarginContainer/AspectRatioContainer"]
+layout_mode = 2

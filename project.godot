@@ -11,14 +11,24 @@ config_version=5
 [application]
 
 config/name="Nonogram"
+run/main_scene="res://title.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
 project/assembly_name="Nonogram"
 
+[gui]
+
+theme/custom_font="res://fonts/DS-DIGII.TTF"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(1, 0.772549, 1, 1)

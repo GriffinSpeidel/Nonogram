@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxo408nfx152s"]
+
+[ext_resource type="Script" path="res://ui/level_select.gd" id="1_1cuty"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1cuty")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 38.0
+offset_right = 324.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(0.25312, 0.0880044, 0.439826, 1)
+theme_override_font_sizes/font_size = 40
+text = "Choose a Level:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 92.0
+offset_right = 707.0
+offset_bottom = 584.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8

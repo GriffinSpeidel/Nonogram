@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://c17nt75n8nfxk"]
+
+[ext_resource type="FontFile" uid="uid://djeeh7xh40h2c" path="res://fonts/DS-DIGII.TTF" id="1_6b3vq"]
+[ext_resource type="Script" path="res://title.gd" id="1_sav7m"]
+[ext_resource type="StyleBox" uid="uid://c67gnquugdt44" path="res://start_button.tres" id="2_rilqn"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_sav7m")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 103.0
+offset_top = 84.0
+offset_right = 864.0
+offset_bottom = 165.0
+theme_override_colors/font_color = Color(0.113725, 0.886275, 1, 1)
+theme_override_fonts/font = ExtResource("1_6b3vq")
+theme_override_font_sizes/font_size = 80
+text = "Welcome to Nonograms!"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 190.0
+offset_top = 198.0
+offset_right = 387.0
+offset_bottom = 247.0
+theme_override_colors/font_color = Color(0.477754, 0.761414, 0.905614, 1)
+theme_override_colors/font_hover_color = Color(0.28145, 0.908112, 0.426314, 1)
+theme_override_colors/icon_normal_color = Color(0.858824, 0.141176, 0.490196, 1)
+theme_override_fonts/font = ExtResource("1_6b3vq")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("2_rilqn")
+theme_override_styles/hover = ExtResource("2_rilqn")
+theme_override_styles/pressed = ExtResource("2_rilqn")
+theme_override_styles/disabled = ExtResource("2_rilqn")
+theme_override_styles/focus = ExtResource("2_rilqn")
+text = "Start Game"

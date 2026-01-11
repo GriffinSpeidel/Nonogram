@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://xvssxdw0y7ar"]
+
+[ext_resource type="Script" path="res://ui/level_button.gd" id="1_80ftn"]
+[ext_resource type="StyleBox" uid="uid://c67gnquugdt44" path="res://start_button.tres" id="1_kljok"]
+
+[node name="LevelButton" type="Button"]
+custom_minimum_size = Vector2(0, 48)
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.227451, 0.513726, 0.215686, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.802441, 0.483204, 0.772423, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("1_kljok")
+theme_override_styles/hover = ExtResource("1_kljok")
+theme_override_styles/pressed = ExtResource("1_kljok")
+theme_override_styles/disabled = ExtResource("1_kljok")
+theme_override_styles/focus = ExtResource("1_kljok")
+script = ExtResource("1_80ftn")
