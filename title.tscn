@@ -10,6 +10,7 @@ anchors_preset = 0
 script = ExtResource("1_sav7m")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 103.0
 offset_top = 84.0
 offset_right = 864.0
@@ -21,6 +22,7 @@ text = "Welcome to Nonograms!"
 horizontal_alignment = 1
 
 [node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 190.0
 offset_top = 198.0
 offset_right = 387.0

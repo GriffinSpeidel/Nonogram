@@ -33,7 +33,9 @@ func add_level_button(file_name: String):
 	level_button.level_selected.connect(_on_level_selected)
 	vbox.add_child(level_button)
 
-func _on_level_selected(level_file: String):
-	print("Selected level:", level_file)
-	# Future:
-	# load_level(level_file)
+func _on_level_selected(board_file: String):
+	var main_scene := preload("res://scenes/main.tscn").instantiate()
+	get_tree().root.add_child(main_scene)
+	main_scene.load_level("res://boards/%s" % board_file)
+	get_tree().current_scene = main_scene
+	self.queue_free()

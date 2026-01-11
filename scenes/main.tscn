@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://hlys16w1gmx2"]
+[gd_scene load_steps=4 format=3 uid="uid://hlys16w1gmx2"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_i6rt3"]
+[ext_resource type="StyleBox" uid="uid://c67gnquugdt44" path="res://start_button.tres" id="2_rc4f1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjufw"]
 bg_color = Color(0.25098, 0.0823529, 0.427451, 0)
@@ -13,31 +16,25 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_i6rt3")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 369.0
-offset_top = 32.0
-offset_right = 816.0
-offset_bottom = 81.0
+offset_left = 55.0
+offset_top = 28.0
+offset_right = 502.0
+offset_bottom = 77.0
 theme_override_colors/font_color = Color(0.0705882, 0, 0.780392, 1)
 theme_override_font_sizes/font_size = 48
 text = "Good luck, have fun :3"
 
-[node name="Lives" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 83.0
-offset_top = 151.0
-offset_right = 123.0
-offset_bottom = 191.0
-
 [node name="NonogramBoard" type="Control" parent="."]
 custom_minimum_size = Vector2(300, 300)
 anchors_preset = 0
-offset_left = 465.0
-offset_top = 264.0
-offset_right = 765.0
-offset_bottom = 564.0
+offset_left = 701.0
+offset_top = 216.0
+offset_right = 1101.0
+offset_bottom = 616.0
 
 [node name="Panel" type="Panel" parent="NonogramBoard"]
 layout_mode = 1
@@ -46,12 +43,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xjufw")
 
 [node name="MarginContainer" type="MarginContainer" parent="NonogramBoard/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -59,6 +61,35 @@ theme_override_constants/margin_bottom = 4
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="NonogramBoard/Panel/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="GridContainer" type="GridContainer" parent="NonogramBoard/Panel/MarginContainer/AspectRatioContainer"]
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="LineContainer" type="Control" parent="NonogramBoard/Panel/MarginContainer/AspectRatioContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Hints" type="Control" parent="NonogramBoard"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 104.0
+offset_right = 408.0
+offset_bottom = 129.0
+theme_override_colors/font_color = Color(0.027451, 0.192157, 0.494118, 1)
+theme_override_colors/font_hover_color = Color(0.397445, 0.659834, 0.864104, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("2_rc4f1")
+theme_override_styles/hover = ExtResource("2_rc4f1")
+theme_override_styles/pressed = ExtResource("2_rc4f1")
+theme_override_styles/disabled = ExtResource("2_rc4f1")
+theme_override_styles/focus = ExtResource("2_rc4f1")
+text = "(escape...)"
