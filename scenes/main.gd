@@ -43,7 +43,7 @@ func load_level(file_path: String):
 	grid_size = solution.size()
 	
 	# draw grid after the layout is finalized so the aspect ratio container has a size
-	call_deferred("_draw_grid")
+	call_deferred("_build_grid")
 
 func _draw_grid():
 	var line_container = aspect.get_node("LineContainer")
@@ -56,7 +56,7 @@ func _draw_grid():
 	for i in range(1, grid_size):
 		# vertical line
 		var line_v := Line2D.new()
-		line_v.width = 1
+		line_v.width = 4
 		line_v.default_color = Color("#40156d")
 		line_v.add_point(Vector2(i * cell_size, 0) * aspect.size)
 		line_v.add_point(Vector2(i * cell_size, 1) * aspect.size)
@@ -64,15 +64,15 @@ func _draw_grid():
 
 		# horizontal line
 		var line_h := Line2D.new()
-		line_h.width = 1
+		line_h.width = 4
 		line_h.default_color = Color("#40156d")
 		line_h.add_point(Vector2(0, i * cell_size) * aspect.size)
 		line_h.add_point(Vector2(1, i * cell_size) * aspect.size)
 		line_container.add_child(line_h)
 	
-	build_grid()
+	# build_grid()
 
-func build_grid():
+func _build_grid():
 	# Clear old cells
 	for child in grid_container.get_children():
 		child.queue_free()

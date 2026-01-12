@@ -11,6 +11,7 @@ var filled_color: Color = Color("#294acf")
 var blocked_color: Color = Color(1,1,1,0)
 var blocked_line_color: Color = Color("#960f38")
 var blocked_line_width: float = 2.0
+var grid_color: Color = Color("#40156d")
 
 func _ready():
 	# Enable mouse button events
@@ -45,3 +46,6 @@ func _draw():
 			# Draw X
 			draw_line(Vector2(0,0), Vector2(size.x, size.y), blocked_line_color, blocked_line_width)
 			draw_line(Vector2(0,size.y), Vector2(size.x,0), blocked_line_color, blocked_line_width)
+	
+	# draw the cell border
+	draw_rect(Rect2(Vector2.ZERO, size), grid_color, false, 2)
