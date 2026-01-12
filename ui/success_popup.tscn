@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://7gw0qj3nkgvb"]
+
+[ext_resource type="StyleBox" uid="uid://c67gnquugdt44" path="res://start_button.tres" id="1_3d82d"]
+
+[node name="SuccessPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 300.0
+color = Color(0.577047, 0.843598, 0.843128, 1)
+
+[node name="ReferenceRect" type="ReferenceRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.234092, 0.592126, 0.647643, 1)
+border_width = 6.0
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 30.0
+offset_right = 523.0
+offset_bottom = 213.0
+theme_override_colors/font_color = Color(0.501048, 0, 0.223375, 1)
+theme_override_font_sizes/font_size = 68
+text = "You got it right, Congratulations!"
+autowrap_mode = 3
+
+[node name="BackButton" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 200.0
+offset_right = 454.0
+offset_bottom = 249.0
+theme_override_colors/font_color = Color(0.0625672, 0.197358, 0.338448, 1)
+theme_override_colors/font_hover_color = Color(0.565549, 0.405481, 0.585286, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("1_3d82d")
+theme_override_styles/hover = ExtResource("1_3d82d")
+theme_override_styles/pressed = ExtResource("1_3d82d")
+theme_override_styles/disabled = ExtResource("1_3d82d")
+theme_override_styles/focus = ExtResource("1_3d82d")
+text = "Back to Level Select"

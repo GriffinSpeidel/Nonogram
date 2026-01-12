@@ -1,4 +1,4 @@
-extends Control
+class_name NonogramCell extends Control
 
 # States
 enum CellState { EMPTY, FILLED, BLOCKED }
@@ -20,6 +20,12 @@ func _ready():
 func set_state(new_state: CellState) -> void:
 	state = new_state
 	queue_redraw()
+
+func get_state() -> int:
+	if state == CellState.FILLED:
+		return 1
+	else:
+		return 0
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:

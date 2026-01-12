@@ -6,18 +6,22 @@ enum CellState { EMPTY, FILLED, BLOCKED }
 @onready var col_clues := $NonogramBoard/ColumnClueArea/HBoxContainer
 @onready var row_clues := $NonogramBoard/RowClueArea/VBoxContainer
 @onready var back_button := $BackButton
+@onready var check_button := $CheckButton
 @onready var board_panel := $NonogramBoard/Panel
 @onready var aspect := board_panel.get_node("MarginContainer/AspectRatioContainer")
 @onready var TITLE_SCENE := "res://ui/level_select.tscn"
 @onready var grid_container := $NonogramBoard/Panel/MarginContainer/AspectRatioContainer/GridContainer
 
 var cell_scene := preload("res://ui/nonogram_cell.tscn")
+var success_scene := preload("res://ui/success_popup.tscn")
+var failure_scene := preload("res://ui/failure_popup.tscn")
 
 var solution : Array = []  # stores rows as arrays of ints
 var grid_size : int = 0 # assumes square grids
 
 func _ready():
 	back_button.pressed.connect(_on_back_pressed)
+	check_button.pressed.connect(_on_check_pressed)
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file(TITLE_SCENE)
@@ -150,3 +154,27 @@ func add_hint(container: Container, value: int, size: int):
 	label.clip_text = true
 	
 	container.add_child(label)
+
+func _on_check_pressed():
+	# set variables that will track iteration through solution matrix
+	var x = 0
+	var y = 0
+	
+	# initialized to true, set to false if a mismatch is found
+	var correct = true
+	
+	for cell in grid_container.get_children():
+		if cell is NonogramCell:
+			if solution[y][x] != cell.get_state():
+				correct = false
+				break
+			else:
+				# increment x and y, wrapping around rows if necessary
+				x += 1
+				if x >= grid_size:
+					y += 1
+					x = 0
+	
+	var popup = success_scene.instantiate() if correct else failure_scene.instantiate()
+	popup.position = Vector2(57, 217)
+	add_child(popup)
