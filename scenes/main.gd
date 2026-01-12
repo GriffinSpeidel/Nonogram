@@ -1,8 +1,10 @@
-extends Node
+extends Control
 
 enum CellState { EMPTY, FILLED, BLOCKED }
 
 @onready var board := $NonogramBoard
+@onready var col_clues := $NonogramBoard/ColumnClueArea/HBoxContainer
+@onready var row_clues := $NonogramBoard/RowClueArea/VBoxContainer
 @onready var back_button := $BackButton
 @onready var board_panel := $NonogramBoard/Panel
 @onready var aspect := board_panel.get_node("MarginContainer/AspectRatioContainer")
@@ -44,33 +46,7 @@ func load_level(file_path: String):
 	
 	# draw grid after the layout is finalized so the aspect ratio container has a size
 	call_deferred("_build_grid")
-
-func _draw_grid():
-	var line_container = aspect.get_node("LineContainer")
-	
-	for child in line_container.get_children():
-		child.queue_free()
-
-	var cell_size := 1.0 / grid_size # the fraction of the total square for each cell
-
-	for i in range(1, grid_size):
-		# vertical line
-		var line_v := Line2D.new()
-		line_v.width = 4
-		line_v.default_color = Color("#40156d")
-		line_v.add_point(Vector2(i * cell_size, 0) * aspect.size)
-		line_v.add_point(Vector2(i * cell_size, 1) * aspect.size)
-		line_container.add_child(line_v)
-
-		# horizontal line
-		var line_h := Line2D.new()
-		line_h.width = 4
-		line_h.default_color = Color("#40156d")
-		line_h.add_point(Vector2(0, i * cell_size) * aspect.size)
-		line_h.add_point(Vector2(1, i * cell_size) * aspect.size)
-		line_container.add_child(line_h)
-	
-	# build_grid()
+	call_deferred("_draw_hints")
 
 func _build_grid():
 	# Clear old cells
@@ -89,14 +65,88 @@ func _build_grid():
 			cell.size_flags_vertical = Control.SIZE_EXPAND_FILL
 			grid_container.add_child(cell)
 
-func draw_hints():
+func _draw_hints():
+	# clear old hints
+	for child in col_clues.get_children():
+		child.queue_free()
+
+	for child in row_clues.get_children():
+		child.queue_free()
+
 	grid_size = solution.size()
-	var cell_size = 1.0 / grid_size
+	var cell_size = aspect.size.x / grid_size * 0.75
 	
 	for i in range(grid_size):
 		# create the ith column
 		var col = VBoxContainer.new()
-		col.position = Vector2(i * cell_size * board.size(), 0)
+		col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		col.size_flags_vertical = Control.SIZE_FILL
+		col.alignment = BoxContainer.ALIGNMENT_END
 		
-		# make the column expand upwards
-		# col.set_grow_vertical(GROW_DIRECTION_BEGIN)
+		# add clues from the solution
+		var empty_clue = true
+		var region_size = 0
+		# look down the ith column in the solution grid
+		for k in range(grid_size):
+			var soln_value = solution[k][i]
+			if soln_value == 1:
+				empty_clue = false
+				region_size += 1
+			else:
+				if region_size > 0:
+					# add the appropriate clue
+					add_hint(col, region_size, cell_size)
+					region_size = 0
+		# if it reached the end and still has a nonzero region size pending, add that clue
+		if region_size > 0:
+			add_hint(col, region_size, cell_size)
+		# if no cell is filled, set the clue to 0
+		if empty_clue:
+			add_hint(col, 0, cell_size)
+		
+		# add the column to the HBoxContainer for ColumnClueArea
+		col_clues.add_child(col)
+		
+		# create the ith row
+		var row = HBoxContainer.new()
+		row.size_flags_horizontal = Control.SIZE_FILL
+		row.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		
+		empty_clue = true
+		region_size = 0
+		
+		for k in range(grid_size):
+			var soln_value = solution[i][k]
+			if soln_value == 1:
+				empty_clue = false
+				region_size += 1
+			else:
+				if region_size > 0:
+					# add the appropriate clue
+					add_hint(row, region_size, cell_size)
+					region_size = 0
+		# if it reached the end and still has a nonzero region size pending, add that clue
+		if region_size > 0:
+			add_hint(row, region_size, cell_size)
+		# if no cell is filled, set the clue to 0
+		if empty_clue:
+			add_hint(row, 0, cell_size)
+		
+		row_clues.add_child(row)
+
+func add_hint(container: Container, value: int, size: int):
+	var label = Label.new()
+	label.text = str(value)
+	label.add_theme_color_override("font_color", Color("#40156d"))
+	label.add_theme_font_size_override("font_size", size)
+	
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	
+	label.clip_text = true
+	
+	container.add_child(label)
