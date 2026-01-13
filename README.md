@@ -14,4 +14,6 @@ This game has three boards of varying size. The boards "Test" and "Medium" are f
 
 ## Running the game
 
-If you are using a Windows computer, use the executable located in the "Windows" folder. You must run the exe in the same folder as the .pck file and boards folder.
+If you are using a Windows computer, use the executable located in the "Windows" folder. You can optionally run it with the console enabled using Nonogram.console.exe. You must run the exe in the same folder as the .pck file and boards folder. You only need the files located in the Windows folder, nothing in the main directory.
+
+I was not able to get a working version running for other operating systems. There is a branch for a web version, but it doesn't seem to be functional.
