@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://7gw0qj3nkgvb"]
+[gd_scene load_steps=3 format=3 uid="uid://7gw0qj3nkgvb"]
 
 [ext_resource type="StyleBox" uid="uid://c67gnquugdt44" path="res://start_button.tres" id="1_3d82d"]
+[ext_resource type="Script" path="res://ui/success_popup.gd" id="1_jsleu"]
 
 [node name="SuccessPopup" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jsleu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
