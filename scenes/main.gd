@@ -26,6 +26,11 @@ func _ready():
 func _on_back_pressed():
 	get_tree().change_scene_to_file(TITLE_SCENE)
 
+# file processing code by ChatGPT with prompt "When the user clicks the button for a level from the
+# level select screen, it should load scenes/main.tscn and fill in the NonogramBoard with the
+# appropriate grid. Levels are stored as files with a square arrangement of 0 and 1s, where a 1 is
+# a filled in cell. I want to start by just drawing the grid lines that will define the grid based
+# on the number of rows/columns in the file"
 func load_level(file_path: String):
 	var file := FileAccess.open(file_path, FileAccess.ModeFlags.READ)
 	if file == null:
@@ -52,6 +57,7 @@ func load_level(file_path: String):
 	call_deferred("_build_grid")
 	call_deferred("_draw_hints")
 
+# code written by myself
 func _build_grid():
 	# Clear old cells
 	for child in grid_container.get_children():
@@ -65,10 +71,13 @@ func _build_grid():
 			cell.set_state(CellState.EMPTY)
 			
 			# make the cell fill the space allocated by the GridContainer
+			# from ChatGPT with prompt "how do I make a control node fill the size of its container?"
 			cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			cell.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			
 			grid_container.add_child(cell)
 
+# code written by myself with exception of alignment settings which were suggested by ChatGPT
 func _draw_hints():
 	# clear old hints
 	for child in col_clues.get_children():
@@ -138,6 +147,7 @@ func _draw_hints():
 		
 		row_clues.add_child(row)
 
+# code structure written by myself, alignments adjusted by ChatGPT to fit to desired location on screen
 func add_hint(container: Container, value: int, size: int):
 	var label = Label.new()
 	label.text = str(value)
@@ -155,6 +165,7 @@ func add_hint(container: Container, value: int, size: int):
 	
 	container.add_child(label)
 
+# code written by myself
 func _on_check_pressed():
 	# set variables that will track iteration through solution matrix
 	var x = 0

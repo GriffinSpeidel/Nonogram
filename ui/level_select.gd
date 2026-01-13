@@ -8,11 +8,16 @@ const LEVEL_BUTTON_SCENE := preload("res://ui/level_button.tscn")
 func _ready():
 	populate_level_list()
 
+# functions taken from ChatGPT response to "I want to create a vertically scrolling list of level names (taken from file names). When the player clicks on a level, it should then load the scene for that level"
+
 func populate_level_list():
 	for child in vbox.get_children():
 		child.queue_free()
-
-	var dir := DirAccess.open(LEVEL_DIR)
+	
+	# code adapted from ChatGPT with prompt "I exported an exe and it launches fine but is unable to read from the levels directory. That folder is in the same directory as the exe"
+	var boards_dir = "res://boards" if OS.has_feature("editor") else OS.get_executable_path().get_base_dir() + "/boards"
+	
+	var dir := DirAccess.open(boards_dir)
 	if dir == null:
 		push_error("Could not open level directory")
 		return
